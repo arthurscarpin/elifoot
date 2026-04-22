@@ -16,13 +16,15 @@ public class StadiumService {
 
     private final StadiumRepository repository;
 
+    private final StadiumMapper mapper;
+
     public Page<StadiumResponse> findAll(Pageable pageable) {
         return repository.findAll(pageable)
-                .map(StadiumMapper::toResponse);
+                .map(mapper::toResponse);
     }
 
     @Transactional
     public StadiumResponse save(StadiumRequest request) {
-        return StadiumMapper.toResponse(repository.save(StadiumMapper.toEntity(request)));
+        return mapper.toResponse(repository.save(mapper.toEntity(request)));
     }
 }
