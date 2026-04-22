@@ -4,6 +4,7 @@ import github.arthurscarpin.elifoot.dto.request.ClubRequest;
 import github.arthurscarpin.elifoot.dto.response.ClubDetailResponse;
 import github.arthurscarpin.elifoot.dto.response.ClubResponse;
 import github.arthurscarpin.elifoot.entity.Club;
+import github.arthurscarpin.elifoot.entity.Stadium;
 import github.arthurscarpin.elifoot.exceptions.ResourceNotFoundException;
 import github.arthurscarpin.elifoot.mapper.ClubMapper;
 import github.arthurscarpin.elifoot.repository.ClubRepository;
@@ -32,13 +33,13 @@ public class ClubService {
 
     @Transactional
     public ClubDetailResponse save(ClubRequest request) {
-        Club newClub = mapper.toEntity(request);
-        if (Objects.nonNull(newClub.getStadium())) {
-            newClub.setStadium(stadiumService.searchResource(newClub.getStadium().getId()));
+        Club club = mapper.toEntity(request);
+        if (Objects.nonNull(club.getStadium())) {
+            club.setStadium(stadiumService.searchResource(club.getStadium().getId()));
         }
-        newClub.setCreatedAt(LocalDateTime.now());
-        newClub.setActive(true);
-        return mapper.toClubDetailResponse(repository.save(newClub));
+        club.setCreatedAt(LocalDateTime.now());
+        club.setActive(true);
+        return mapper.toClubDetailResponse(repository.save(club));
     }
 
     public Page<ClubResponse> findAll(Pageable pageable) {
@@ -48,5 +49,24 @@ public class ClubService {
 
     public ClubDetailResponse findById(Long id) {
         return mapper.toClubDetailResponse(searchResource(id));
+    }
+
+    @Transactional
+    public ClubDetailResponse updateById(Long id, ClubRequest request) {
+        Club club = searchResource(id);
+        if (Objects.nonNull(request.stadiumId())) {
+            Stadium stadium = stadiumService.searchResource(request.stadiumId());
+            club.setStadium(stadium);
+        }
+        club.setName(request.name());
+        club.setFounded(request.founded());
+        club.setUrlImg(request.urlImg());
+        return mapper.toClubDetailResponse(repository.save(club));
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        Club club = searchResource(id);
+        repository.deleteById(club.getId());
     }
 }

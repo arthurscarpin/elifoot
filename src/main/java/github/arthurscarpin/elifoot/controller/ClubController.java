@@ -34,4 +34,16 @@ public class ClubController {
     public ClubDetailResponse findById(@PathVariable Long id) {
         return service.findById(id);
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ClubDetailResponse updateById(@PathVariable Long id, @RequestBody ClubRequest request) {
+        return service.updateById(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) {
+        service.deleteById(id);
+    }
 }
