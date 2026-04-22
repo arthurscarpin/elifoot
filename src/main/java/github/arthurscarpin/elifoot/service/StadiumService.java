@@ -3,7 +3,7 @@ package github.arthurscarpin.elifoot.service;
 import github.arthurscarpin.elifoot.dto.request.StadiumRequest;
 import github.arthurscarpin.elifoot.dto.response.StadiumResponse;
 import github.arthurscarpin.elifoot.entity.Stadium;
-import github.arthurscarpin.elifoot.exception.ResourceNotFoundException;
+import github.arthurscarpin.elifoot.exceptions.ResourceNotFoundException;
 import github.arthurscarpin.elifoot.mapper.StadiumMapper;
 import github.arthurscarpin.elifoot.repository.StadiumRepository;
 import jakarta.transaction.Transactional;
@@ -20,7 +20,7 @@ public class StadiumService {
 
     private final StadiumMapper mapper;
 
-    private Stadium searchResource(Long id) {
+    protected Stadium searchResource(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stadium not found with id: " + id));
     }
 

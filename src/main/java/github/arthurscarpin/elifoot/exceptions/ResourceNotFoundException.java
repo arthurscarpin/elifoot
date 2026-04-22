@@ -1,4 +1,4 @@
-package github.arthurscarpin.elifoot.exception;
+package github.arthurscarpin.elifoot.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
 

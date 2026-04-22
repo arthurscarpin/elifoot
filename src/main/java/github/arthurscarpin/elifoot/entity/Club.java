@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -24,6 +25,10 @@ public class Club {
     private LocalDate founded;
 
     private String urlImg;
+
+    private LocalDateTime createdAt;
+
+    private boolean active;
 
     @OneToOne
     @JoinColumn(name = "stadium_id")
