@@ -2,15 +2,13 @@ package github.arthurscarpin.elifoot.entity;
 
 import github.arthurscarpin.elifoot.enums.Position;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 public class Player {
 
