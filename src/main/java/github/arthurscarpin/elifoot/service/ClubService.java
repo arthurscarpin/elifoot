@@ -27,7 +27,7 @@ public class ClubService {
 
     private final StadiumService stadiumService;
 
-    private Club searchResource(Long id) {
+    protected Club searchResource(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Club not found with id: " + id));
     }
 

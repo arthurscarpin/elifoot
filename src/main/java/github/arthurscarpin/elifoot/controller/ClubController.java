@@ -4,6 +4,7 @@ import github.arthurscarpin.elifoot.dto.request.ClubRequest;
 import github.arthurscarpin.elifoot.dto.response.ClubDetailResponse;
 import github.arthurscarpin.elifoot.dto.response.ClubResponse;
 import github.arthurscarpin.elifoot.service.ClubService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,7 @@ public class ClubController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ClubDetailResponse save(@RequestBody ClubRequest request) {
+    public ClubDetailResponse save(@RequestBody @Valid ClubRequest request) {
         return service.save(request);
     }
 
@@ -37,7 +38,7 @@ public class ClubController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ClubDetailResponse updateById(@PathVariable Long id, @RequestBody ClubRequest request) {
+    public ClubDetailResponse updateById(@PathVariable Long id, @RequestBody @Valid ClubRequest request) {
         return service.updateById(id, request);
     }
 
