@@ -34,3 +34,5 @@ build/
 
 ### Environment ###
 .env
+authz.pem
+authz.pub
