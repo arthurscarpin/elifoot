@@ -3,7 +3,9 @@ package github.arthurscarpin.elifoot.dto.request;
 import github.arthurscarpin.elifoot.enums.Position;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
+@Builder
 public record PlayerRequest(
         @NotBlank
         String name,
